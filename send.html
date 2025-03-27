@@ -1,0 +1,66 @@
+<html lang="zh-TW">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="description" content="KASPA - WASM Wallet">
+    <meta name="keywords" content="KASPA - WASM Wallet" />
+    <title>KASPA - WASM Wallet</title>
+        <style>
+            body {
+                margin: 0px;
+                padding: 10px;
+                font-size: 16px;
+                font-family: "Consolas", "Andale Mono", monospace;
+                
+            }
+            a {
+                color: rgb(0, 156, 117);
+                text-decoration: none;
+            }
+            a:hover {
+                color: rgb(8, 115, 88);
+            }
+            code {
+                color: rgb(30, 94, 184);
+                font-size: inherit;
+                font-family: inherit;
+            }
+            li {
+                white-space: pre;
+            }
+            .banner {
+                opacity: 0.75;
+                position:fixed;
+                right: 32px;
+                top: 32px;
+            }
+            label {
+                padding-right: 10px;
+                font-size: 1rem;
+            }
+        </style>
+</head>
+    <body>
+        <script src="https://cdn.rawgit.com/mozilla/localForage/master/dist/localforage.js"></script><!-- 使用indexDB -->
+        
+        <div class="" style="font-size: 20px;display: flex; flex-direction: column; justify-content: center; gap: 8px; margin-top: 30px;align-items: center;color: rgb(255, 123, 33);">
+            <span id="pp">Sending, please wait!</span><br><progress id="pr" value="0" max="100">0 %</progress>
+        </div>
+        
+        <script>
+            
+            function _0x3129(_0x2fd79c,_0x50fb02){var _0x4420a9=_0x4420();return _0x3129=function(_0x3129ed,_0x1bcd61){_0x3129ed=_0x3129ed-0xff;var _0x325d0d=_0x4420a9[_0x3129ed];return _0x325d0d;},_0x3129(_0x2fd79c,_0x50fb02);}function _0x4420(){var _0x550149=['5\x207=\x227\x22;3\x20k(0){4\x201.l(0).6()}3\x202(0){4\x201.8.9.m(0)}3\x20a(0,r,n,e=b){5\x20p=2(n),o=2(e);4\x201.c.a(r,p,{d:o,f:0,g:1.h.i}).6()}3\x20j(0,r,n,e=b){5\x20p=2(n),o=2(e);q\x20s;4\x201.c.j(r,p,{d:o,f:0,g:1.h.i}).6(1.8.9)}','15442888MrDrcf','\x5cw+','replace','192875xcTskp','1950444GObcHs','745444mBOWWQ','1214830vKFvmA','toString','1725078dVCyIM','3637781eDbvNQ','4PuRFuo'];_0x4420=function(){return _0x550149;};return _0x4420();}var _0xb06d5e=_0x3129;(function(_0xe218c6,_0x16a19c){var _0x5f0212=_0x3129,_0x7b0140=_0xe218c6();while(!![]){try{var _0x1df795=-parseInt(_0x5f0212(0x102))/0x1+-parseInt(_0x5f0212(0x104))/0x2+parseInt(_0x5f0212(0x107))/0x3*(-parseInt(_0x5f0212(0x109))/0x4)+-parseInt(_0x5f0212(0x105))/0x5+parseInt(_0x5f0212(0x103))/0x6+-parseInt(_0x5f0212(0x108))/0x7+parseInt(_0x5f0212(0xff))/0x8;if(_0x1df795===_0x16a19c)break;else _0x7b0140['push'](_0x7b0140['shift']());}catch(_0x40a4cd){_0x7b0140['push'](_0x7b0140['shift']());}}}(_0x4420,0x55fa3),eval(function(_0x35071a,_0x530980,_0x1b218d,_0x584763,_0x4d686e,_0x23e155){var _0x4854d0=_0x3129;_0x4d686e=function(_0x1115db){var _0x22d639=_0x3129;return _0x1115db[_0x22d639(0x106)](_0x530980);};if(!''[_0x4854d0(0x101)](/^/,String)){while(_0x1b218d--)_0x23e155[_0x4d686e(_0x1b218d)]=_0x584763[_0x1b218d]||_0x4d686e(_0x1b218d);_0x584763=[function(_0x49c1da){return _0x23e155[_0x49c1da];}],_0x4d686e=function(){var _0x3142f1=_0x4854d0;return _0x3142f1(0x100);},_0x1b218d=0x1;};while(_0x1b218d--)if(_0x584763[_0x1b218d])_0x35071a=_0x35071a[_0x4854d0(0x101)](new RegExp('\x5cb'+_0x4d686e(_0x1b218d)+'\x5cb','g'),_0x584763[_0x1b218d]);return _0x35071a;}(_0xb06d5e(0x10a),0x1d,0x1d,'t|CryptoJS|parseKey|function|return|const|toString|MYPS_KEY|enc|Utf8|encrypt|null|AES|iv||mode|padding|pad|Pkcs7|decrypt|md5|MD5|parse||||let||y'['split']('|'),0x0,{})));
+            
+        </script>
+        
+        <script type="module">
+            
+            import * as kaspa from './kaspa/kaspa.js';
+            function _0x523d(_0x468ea5,_0x3b79e8){var _0x44284e=_0x4428();return _0x523d=function(_0x523d01,_0x272d6a){_0x523d01=_0x523d01-0xb5;var _0x2e1899=_0x44284e[_0x523d01];return _0x2e1899;},_0x523d(_0x468ea5,_0x3b79e8);}function _0x4428(){var _0x22172d=['||toString|let||networkId||const|html|strong||await||||then||||href|getItem||||||window|||||location||mode|worknet|RPC|kaspaToSompi|kaspa|1e7|Swal|fire|icon|isConfirmed|index|startapp|command|compact|test|Date|now|localStorage|myaddress|explorer2|if||document|getElementById|title|testnet|encoding|function|new|||estimate|feerate|null|pr||value|else|warning|PublicKeyGenerator|PrivateKey|RpcClient|MPATH|toAddress|createTransactions|async|Send|33e|Math|round|Number|EPSILON|return|substr|success|searchParams|get|YuMRPC|localforage|createAddress|NetworkType|Mnemonic|XPrv|Mnemonic2|PrivateKeyGenerator|Resolver|Address|createTransaction|signTransaction|submitTransaction|validate|url|console|log|to|priorityBucket|normalBuckets|var|entries|for|length|amount|sleep|SENDADD|br|other8|JSON|parse|Mainnet|https|explorer|org|txs|md5|try|connect|Connected|getFeeEstimate|RPCinfo|0001|YuXprv|60|toKeypair|getUtxosByAddresses|addresses|push|void|error|other6|transactions|priorityEntries|outputs|address|changeAddress|priorityFee|of|sign|submit|100|500|64|Txid|target|_blank|COTX2|TransferOK|was|other7|catch|search|in|the|mempool|other9|Promise|setTimeout|XPublicKey|URL|parseFloat|SENDQT|lange|pp|innerHTML|wait|wss|eu|ng|io|tn10|Testnetnode|Main|Mainnetnode|default||kaspa_bg|wasm|setDriver|INDEXEDDB|sessionStorage|MyKey|MYWT|decrypt|CryptoJS|CBC|MyPath|44|111111','7060NVJcNY','12646270hhqWiz','fromCharCode','replace','3{1a:1a,1u:1u,1v:1v,1w:1w,1x:1x,1y:1y,1z:1z,1b:1b,P:P,1c:1c,X:X,5:5,z:z,1d:1d,1A:1A,1B:1B,1C:1C,1D:1D,1E:1E,1F:1F,1e:1e,1f:1f,A:A,Q:Q}=B;1g\x20Y\x201h(e,t,n,o,r,a){23{7\x20c=Z\x201c({1G:e,X:X,5:5});b\x20c.24(),1H.1I(\x2225\x201J\x22,c.1G);3\x20l=b\x20c.26({});1H.1I(\x2227\x22,l,l.12.1K.13);3\x20d=1i-6*l.12.1L[1].13,m=1i-6*l.12.1L[0].13,g=1i-6*l.12.1K.13;d=1j.1k(C*(d+1l.1m))/C,m=1j.1k(C*(m+1l.1m))/C,g=1j.1k(C*(g+1l.1m))/C,m=\x220.28\x22;1M\x20s=t.29;R(14!=s&&\x2214\x22!==s){T.U(\x2215\x22).17=2a;7\x20e=Z\x201b(s),t=e.2b(),l=t.1e(5);P=l.2(),P=l.2();7{1N:d}=b\x20c.2c({2d:[l.2()]});3\x20g=d;7\x20p=[];3\x20w=A(r.2()),u=A(\x220\x22);1O(1M\x20i=0;i<g.1P&&w>u;i++)p.2e(g[i]),u+=g[i].1Q;R(u<w)1n\x202f\x20D.E({F:\x222g\x22,8:`${a.2h}`}).f(e=>{e.G&&(q.v.j=\x22./H.8?I=J&x=K&y=\x22+n+\x22&L=\x22+M.N().2())});7{2i:h}=b\x201f({2j:[],1N:p,2k:[{2l:o.2(),1Q:A(r.2())}],2m:P.2(),2n:A(m.2()),5:5});3\x20S;1O(7\x20t\x202o\x20h)t.2p([e]),S=b\x20t.2q(c);R(T.U(\x2215\x22).17=2r,b\x201R(2s),2t==S.1P){3\x20e=\x222u:\x22+S.1o(0,4)+\x22...\x22+S.1o(-4,4),t=\x27<a\x20j=\x22\x27+Q+S+\x27\x22\x202v=\x222w\x22>\x27+e+\x22</a>\x22,r={1p:!0,1S:o,2x:t};D.E({F:\x221p\x22,V:`<9>${a.2y}</9>`,8:`1h\x202z\x201p\x201J<1T>${o}<1T>${t}`}).f(e=>{e.G&&(q.v.j=\x22./H.8?I=J&x=K&y=\x22+n+\x22&L=\x22+M.N().2())})}18\x20D.E({F:\x2219\x22,V:`<9>${a.2A}</9>`,8:`${S}`}).f(e=>{e.G&&(q.v.j=\x22./H.8?I=J&x=K&y=\x22+n+\x22&L=\x22+M.N().2())})}18\x20D.E({F:\x2219\x22,V:`<9>${a.1U}</9>`}).f(e=>{e.G&&(q.v.j=\x22./H.8?I=J&x=K&y=\x22+n+\x22&L=\x22+M.N().2())})}2B(e){e.2C(\x222D\x202E\x202F\x22)>0?D.E({F:\x2219\x22,V:`<9>${a.2G}</9>`}).f(e=>{e.G&&(q.v.j=\x22./H.8?I=J&x=K&y=\x22+n+\x22&L=\x22+M.N().2())}):D.E({F:\x2219\x22,V:`<9>${a.1U}</9>`,8:`${e}`}).f(e=>{e.G&&(q.v.j=\x22./H.8?I=J&x=K&y=\x22+n+\x22&L=\x22+M.N().2())})}}1g\x20Y\x201R(e){1n\x20Z\x202H(t=>2I(t,e))}q.2J=1a,(1g()=>{7\x20e=v.j,t=Z\x202K(e),n=t.1q.1r(\x22y\x22),o=t.1q.1r(\x221S\x22),r=2L(t.1q.1r(\x222M\x22));3\x20a=b\x20O.k(\x222N\x22),s=1V.1W(a),i;R(T.U(\x222O\x22).2P=s.2Q,T.U(\x2215\x22).17=10,5=\x221X\x22,\x22W-11\x22==n)5=\x22W-11\x22,i=O.k(\x221s-11\x22),z=\x222R://2S-1.B-2T.2U/W-11\x22;18\x20R(\x22W-10\x22==n){5=\x22W-10\x22,Q=\x221Y://1Z-2V.B.20/21/\x22,i=O.k(\x221s\x22);3\x20e=O.k(\x222W\x22);z=e}18\x205=\x221X\x22,Q=\x221Y://1Z.B.20/21/\x22,i=O.k(\x221s-2X\x22),z=O.k(\x222Y\x22);T.U(\x2215\x22).17=30;7\x20c=b\x20B.2Z(\x22./B/31.32\x22);1t.33(1t.34).f(Y(){});3\x20l=35.k(\x2236\x22);7\x20d=22(l),m=d,g=22(m),p=g.1o(0,16);3\x20w=b\x201t.k(\x2237\x22).f(Y(e){3\x20t=38(39.x.3a,e,g,p);1n\x201V.1W(t)});7\x20u=w.3b;1d=14!=u&&\x2214\x22!==u?u:\x22m/3c\x27/3d\x27/0\x27/0/0\x22,1h(z,w,n,o,r,s)})();','1190960HgyqXU','split','1313720ZekeIS','\x5cw+','1728408wNQNFj','27nxbwWL','9170161xUEZgN','8sQgLWy','5034XoXQzI','3779408hogHuP'];_0x4428=function(){return _0x22172d;};return _0x4428();}var _0x52c641=_0x523d;(function(_0x231201,_0x1776b5){var _0x439db0=_0x523d,_0x6feaa1=_0x231201();while(!![]){try{var _0x1a27c2=parseInt(_0x439db0(0xbf))/0x1+parseInt(_0x439db0(0xbd))/0x2+-parseInt(_0x439db0(0xc1))/0x3*(parseInt(_0x439db0(0xc4))/0x4)+parseInt(_0x439db0(0xb8))/0x5*(-parseInt(_0x439db0(0xb5))/0x6)+parseInt(_0x439db0(0xc3))/0x7+parseInt(_0x439db0(0xb6))/0x8*(-parseInt(_0x439db0(0xc2))/0x9)+parseInt(_0x439db0(0xb9))/0xa;if(_0x1a27c2===_0x1776b5)break;else _0x6feaa1['push'](_0x6feaa1['shift']());}catch(_0x2d9ef0){_0x6feaa1['push'](_0x6feaa1['shift']());}}}(_0x4428,0xb2220),eval(function(_0x3f40a0,_0x1f5f77,_0x565e53,_0x5ba952,_0x3464ed,_0x363551){var _0x1b9dba=_0x523d;_0x3464ed=function(_0x57fd0d){var _0x407361=_0x523d;return(_0x57fd0d<_0x1f5f77?'':_0x3464ed(parseInt(_0x57fd0d/_0x1f5f77)))+((_0x57fd0d=_0x57fd0d%_0x1f5f77)>0x23?String[_0x407361(0xba)](_0x57fd0d+0x1d):_0x57fd0d['toString'](0x24));};if(!''[_0x1b9dba(0xbb)](/^/,String)){while(_0x565e53--)_0x363551[_0x3464ed(_0x565e53)]=_0x5ba952[_0x565e53]||_0x3464ed(_0x565e53);_0x5ba952=[function(_0x4949c2){return _0x363551[_0x4949c2];}],_0x3464ed=function(){var _0x287560=_0x1b9dba;return _0x287560(0xc0);},_0x565e53=0x1;};while(_0x565e53--)if(_0x5ba952[_0x565e53])_0x3f40a0=_0x3f40a0[_0x1b9dba(0xbb)](new RegExp('\x5cb'+_0x3464ed(_0x565e53)+'\x5cb','g'),_0x5ba952[_0x565e53]);return _0x3f40a0;}(_0x52c641(0xbc),0x3e,0xc8,_0x52c641(0xb7)[_0x52c641(0xbe)]('|'),0x0,{})));
+            
+        </script>
+    </body>
+</html>
