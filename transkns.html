@@ -1,0 +1,88 @@
+<html lang="zh-TW">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="description" content="KASPA - WASM Wallet">
+    <meta name="keywords" content="KASPA - WASM Wallet" />
+    <title>KASPA - WASM Wallet</title>
+        <style>
+            body {
+                margin: 0px;
+                padding: 32px;
+                font-size: 16px;
+                font-family: "Consolas", "Andale Mono", monospace;
+            }
+            a {
+                color: rgb(0, 156, 117);
+                text-decoration: none;
+            }
+            a:hover {
+                color: rgb(8, 115, 88);
+            }
+            code {
+                color: rgb(30, 94, 184);
+                font-size: inherit;
+                font-family: inherit;
+            }
+            li {
+                white-space: pre;
+            }
+            .banner {
+                opacity: 0.75;
+                position:fixed;
+                right: 32px;
+                top: 32px;
+            }
+            label {
+                padding-right: 10px;
+                font-size: 1rem;
+            }
+        </style>
+</head>
+    <body>
+        <script src="https://cdn.rawgit.com/mozilla/localForage/master/dist/localforage.js"></script><!-- 使用indexDB -->
+        
+        <div class="" style="font-size: 18px;display: flex; flex-direction: column; justify-content: center; gap: 8px; margin-top: 30px;align-items: center;color: rgb(255, 123, 33);">
+            <span id="pp">Sending, please wait!</span><br><progress id="pr" value="0" max="100">0 %</progress>
+        </div>
+                
+        <script>
+            function delWallet22(){
+                localStorage.setItem('YuXprv',null);
+                localStorage.setItem('YuXpub',null);
+                localStorage.setItem('YuXadd',null);
+            }
+            const MYPS_KEY = 'MYPS_KEY'; // localForage 用的 key
+            // 解密 開始
+            // 辅助函数
+            function md5(data) { 
+                return CryptoJS.MD5(data).toString();
+            }
+            // 传入key之前要调用，不然结果不对
+            function parseKey(key) { 
+                return CryptoJS.enc.Utf8.parse(key);
+            }
+            // 加密过程
+            function encrypt(mode, plainText, key, iv = null) { const uKey = parseKey(key); const uIv = parseKey(iv); return CryptoJS.AES.encrypt(plainText, uKey, { iv: uIv, mode: mode, padding: CryptoJS.pad.Pkcs7 } ).toString();
+            }
+            // 解密过程
+            function decrypt(mode, cipherText, key, iv = null) { 
+                const uKey = parseKey(key); const uIv = parseKey(iv); let bytes = CryptoJS.AES.decrypt(cipherText, uKey, { iv: uIv, mode: mode, padding: CryptoJS.pad.Pkcs7 } ); return bytes.toString(CryptoJS.enc.Utf8);
+            }
+        </script>
+        
+        <script type="module">
+            
+            //import * as kaspa from './kaspa/kaspa_wasm.js';
+            import * as kaspa from './kaspa/kaspa.js';
+            //import { log, stringify, currentNetwork } from './resources/utils.js'; // 標題工具連接
+            eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('h K(){5 2v=[\'4r\',\'4s\',\'4t\\4u\\4v\\1H\\4w\\L\\4x\',\'4y\',\'4z\',\'4A\',\'4B\',\'4C:\',\'4D\',\'18\',\'<M>\',\'4E\',\'1I\',\'4F\',\'1J\',\'<w>2w\\4G\\2x\\L\\N<w>\',\'O\',\'4H\',\'4I\',\'1K\',\'4J\',\'19\',\'4K\',\'4L\',\'4M\',\'4N\',\'2y\',\'2z\',\'4O\',\'4P\',\'4Q\',\'4R\',\'4S\',\'4T\',\'4U\',\'2A\',\'4V\',\'0.4W\',\'4X\',\'4Y\',\'1L\',\'2B\',\'4Z\',\'50\',\'</a>\',\'1M\',\'2C\',\'1a\',\'51\',\'2D\',\'./P/52.53\',\'54\\55\\56\\L\\N\',\'2E\',\'57\',\'58\',\'<w>\',\'59\',\'5a\',\'2F\',\'5b-10\',\'5c\',\'5d\',\'5e://5f.5g.5h/5i\',\'2G\',\'5j\',\'5k\',\'2H\',\'5l\',\'5m\',\'1N\',\'5n\\5o\\5p\\2I\\2J:\',\'5q\',\'5r\',\'5s\',\'<M>5t\\N\',\'5u\',\'2K\',\'2L\',\'5v\',\'<a\\5w=\\1O\',\'5x\',\'5y\',\'5z\',\'5A\',\'1b\',\'1c\',\'1d\',\'5B\',\'5C\',\'1P\',\'2M\',\'2N://2O.P.2P/2Q/\',\'5D\',\'2R\\L\',\'2S\',\'...\',\'1e\',\'5E\',\'5F\',\'5G\',\'2T\',\'&2U=\',\'2R\\5H\',\'\\N<w>2w\\5I\\2x\\L\\N<w>\',\'\\1O\\5J=\\5K\\1O>\',\'5L\',\'./Q.x?1d=\',\'5M\',\'q\',\'2V\',\'1Q\',\'2N://2O-5N.P.2P/2Q/\',\'1R\',\'5O\',\'收款方錯誤!請檢查收款地址!\',\'./Q.x?2W=2X&1K=2Y&1d=\',\'5P\',\'</M>\',\'5Q\'];K=h(){i 2v};i K()}h R(2Z,30){5 31=K();i R=h(1f,5R){1f=1f-32;7 33=31[1f];i 33},R(2Z,30)}5 y=R;(h(34,35){5 f=R,S=34();5S(!![]){1g{5 36=j(f(5T))/1S*(j(f(5U))/5V)+-j(f(5W))/5X*(-j(f(5Y))/r)+j(f(5Z))/60+j(f(61))/62*(-j(f(63))/64)+j(f(65))/66+-j(f(67))/68+j(f(69))/37;m(36===35)6a;T S[\'38\'](S[\'39\']())}1h(6b){S[\'38\'](S[\'39\']())}}}(K,6c));7{3a,6d,6e,6f,6g,6h,6i,1T,U,6j,1U,V,9,6k,6l,6m,6n,1i,6o,6p,6q,6r,3b,W,3c,1V,1j,6s,2A,6t,1k,6u,X}=P;z[y(6v)]=3a,((1l()=>{5 4=y;Y 3d=1M[\'1J\'],Z=k 6w(3d),1W=Z[4(1m)][4(1n)](4(6x));7 3e=Z[4(1m)][4(1n)](\'6y\'),3f=Z[4(1m)][4(1n)](4(6z)),3g=Z[4(1m)][4(1n)](4(6A)),3h=6 1X[4(1Y)](4(6B)),1Z=20[4(3i)](3h);11[4(12)](\'6C\')[4(6D)]=1Z[4(6E)];5 6F=6 P[\'6G\'](4(6H));9=\'\'?9:4(3j);m(1W==4(3k)){X=4(6I),9=4(3k);7 3l=1X[\'1Q\'](\'6J\');1k=3l}T X=4(6K),9=4(3j),1k=1X[4(1Y)](4(6L));7 A=6M[\'1Q\'](4(6N));m(3m A!==4(6O)&&A!==1c&&A!==4(3n)&&A!==\'\'){}T{}5 3o=3p(A),3q=3o,21=3p(3q),3r=21[4(1o)](8,3s);7 22=6 6P[4(1Y)](4(6Q))[4(1p)](h(3t){5 23=4;7 3u=6R(6S[23(6T)][\'6U\'],3t,21,3r);i 20[23(3i)](3u)});Y 13=22[4(3v)];m(3m 13!==\'2C\'&&13!==1c&&13!==4(3n)){5 3w=k 1T(13),3x=3w[\'6V\'](),3y=3x[4(3z)](9);U=3y[4(b)]()}T{}3A(1k,3e,3f,3g,22,1W,1Z)})());h 24(25){5 1q=y;Y 26=\'\';27(Y 1r=8;1r<25[1q(3B)];1r++){26+=\'\'+25[1q(6W)](1r)[1q(b)](3s)}i 26}1l h 3A(3C,3D,28,14,3E,C,D){5 1=y;11[1(12)](\'1s\')[1(1t)]=37;5 l=k 1U({\'1b\':3C,\'V\':V,\'9\':9});6 l[1(6X)](),e[1(15)](1(6Y),l[\'1b\']);7{3F:3G}=6 l[1(3H)]();m(!3G){e[1(3I)](1(3J)),6 l[1(3K)]();i}1g{7 6Z=k 1i(14)}1h(70){3L(1(32)),z[1(1u)][1(1v)]=1(71)+C}7 E=6 l[1(72)]({});e[1(15)](1(73),E,E[1(1w)][1(3M)][1(29)]);7 2a=E[1(1w)][\'2M\'][1S][1(29)]*(2b/1x),F=E[1(1w)][1(74)][8][1(29)]*(2b/1x),2c=E[1(1w)][1(3M)][\'2L\']*(2b/1x);2a=2d[\'2e\']((2a+2f[1(3N)])*G)/G,F=2d[\'2e\']((F+2f[\'2G\'])*G)/G,2c=2d[\'2e\']((2c+2f[1(3N)])*G)/G,F=1(75);Y 3O=3E[1(3v)],16=k 1T(3O);5 2g=16[1(76)](),17=2g[1(3z)](9),2h={\'77\':1(78),\'p\':1(79),\'7a\':3D,\'7b\':14};e[1(15)](1(7c),2h);5 2i=k 3b()[1(3P)](2g[1(7d)]()[1(b)]())[1(1y)](W[1(7e)])[1(1y)](W[1(7f)])[1(1y)](W[1(7g)])[\'2D\'](24(1(7h)))[1(7i)](7j)[1(3P)](24(20[1(7k)](2h,1c,8)))[1(1y)](W[1(7l)]),1z=3c(2i[1(7m)](),9),{q:3Q}=6 l[1(2j)]({\'3R\':[17[1(b)]()]}),{3S:3T}=6 1V({\'3U\':[],\'q\':3Q,\'1a\':[{\'2k\':1z[1(b)](),\'2l\':1j(\'2\')}],\'3V\':17[1(b)](),\'3W\':1j(F[\'1R\']()),\'9\':9});7 n,s;11[1(12)](\'1s\')[1(1t)]=7n;1g{27(5 t 3X 3T){t[\'2E\']([16]),n=6 t[\'2F\'](l),e[\'O\'](\'7o\\7p\\7q\\2I\\2J\\7r:\',n),11[1(12)](\'1s\')[\'1N\']=7s,6 2m(7t);5{q:1A}=6 l[1(2j)]({\'3R\':[17[1(b)]()]});7 3Y={\'q\':[{\'7u\':{\'2k\':k 1i(1z[\'1R\']()),\'3Z\':{\'40\':n,\'Q\':8},\'2l\':t[1(1B)][\'1a\'][8][\'1N\'],\'18\':{\'41\':8,\'19\':t[1(1B)][1(2n)][8][1(7v)][\'19\']},\'1e\':1A[8][1(7w)],\'42\':![]},\'3Z\':{\'40\':n,\'Q\':8},\'2k\':k 1i(1z[1(b)]()),\'2l\':t[1(1B)][1(2n)][8][1(1t)],\'42\':![],\'1e\':1A[8][\'1e\'],\'18\':{\'41\':8,\'19\':t[\'1P\'][1(2n)][8][\'18\'][1(7x)]}}]},{3S:43}=6 1V({\'3U\':[3Y[1(7y)][8]],\'q\':1A,\'1a\':[],\'3V\':17[1(b)](),\'3W\':1j(F[1(b)]()),\'9\':9});27(7 u 3X 43){e[1(15)](1(1B),u),u[1(7z)]([16],![]);7 1C=u[\'1P\'][1(7A)][1(7B)](44=>44[1(7C)]===\'\');m(1C!==-1S){5 45=6 u[1(7D)](1C,16);u[1(7E)](1C,2i[1(7F)](45))}11[1(12)](\'1s\')[1(1t)]=7G,6 2m(7H),s=6 u[1(7I)](l),e[\'O\'](1(7J),s)}m(s[\'2K\']==7K){7 46=1(7L)+n[\'2V\'](8,r)+1(47)+n[1(1o)](-r,r),48=1(49)+X+n+1(4a)+46+1(4b),4c=\'7M:\'+s[1(1o)](8,r)+1(47)+s[1(1o)](-r,r),4d=1(49)+X+s+1(4a)+4c+1(4b);1D[\'2z\']({\'1E\':1(7N),\'1F\':1(4e)+D[1(7O)]+1(2o),\'x\':28+1(7P)+14+1(4f)+48+1(4f)+4d})[1(1p)](4g=>{5 H=1;4g[H(2p)]&&(z[\'1M\'][H(1v)]=H(2q)+C+\'&2U=\'+1G[H(4h)]()[H(b)]())})}T 1D[1(2r)]({\'1E\':1(3I),\'1F\':1(4e)+D[\'7Q\']+1(2o),\'x\':28+1(7R)+14+\'<w>\'+D[1(7S)]})[1(1p)](4i=>{5 I=1;4i[\'2B\']&&(z[I(1u)][I(1v)]=\'./Q.x?2W=2X&1K=2Y&1d=\'+C+I(2s)+1G[I(4h)]()[I(b)]())})}}1h(2t){2t[\'7T\'](\'7U\\1H\\7V\')>8?1D[1(2r)]({\'1E\':\'2H\',\'1F\':1(7W)+D[1(7X)]+\'</M>\'})[1(1p)](4j=>{5 J=1;4j[J(2p)]&&(z[J(1u)][\'1J\']=J(2q)+C+J(2s)+1G[\'1L\']()[J(b)]())}):1D[1(2r)]({\'1E\':1(7Y),\'1F\':\'<M>\'+D[\'7Z\']+1(2o),\'x\':\'\'+2t})[\'2T\'](4k=>{5 v=1;4k[v(2p)]&&(z[v(1u)][v(1v)]=v(2q)+C+v(2s)+1G[\'1L\']()[v(b)]())})}}1l h 2m(4l){i k 80(4m=>81(4m,4l))}1l h 82(){5 c=y,o=k 1U({\'1b\':c(83),\'V\':V,\'9\':9});6 o[\'2S\'](),e[\'O\'](c(84),o[c(85)]);7{3F:4n}=6 o[c(3H)]();m(!4n){e[\'1I\'](c(3J)),6 o[\'2y\']();i}1g{e[c(15)](\'86\');7 2u=6 o[c(87)](U);e[\'O\'](c(88),2u);7 4o=/\\B(?<!\\.\\d*)(?=(\\d{3})+(?!\\d))/g,89=(8a(2u[\'8b\'])/1x)[c(b)]()[c(8c)](4o,\',\');5{q:4p}=6 o[c(2j)]([U]);m(4p[c(3B)]===8){3L(c(8d)+U+\'8e\\8f\\8g\\1H\\8h\');i}}1h(4q){e[\'1I\'](\'8i:\',4q)}8j{6 o[c(3K)]()}}',62,516,'|_0x114821|||_0x1c15cc|const|await|let|0x0|networkId||0x23a|_0x4c2675||console|_0x3915c7||function|return|parseInt|new|_0x3c963b|if|_0x3c83ea|_0x5d5505||entries|0x4|_0x42b029|_0x4e4b32|_0x26e95d|_0x195162|br|html|_0x4392a3|window|_0x318d02||_0x4bd024|_0x560ff2|_0x4ff609|_0x5f40f0|0x989680|_0x14979d|_0x2b609d|_0x40efb1|_0x2823|x20to|strong|x20|log|kaspa|index|_0x2a4d|_0x4694d4|else|myaddress|encoding|Opcodes|explorer2|var|_0x27f850||document|0x235|_0x4030d3|_0x57a8d3|0x1da|_0x401b28|_0x1d611a|scriptPublicKey|script|outputs|url|null|worknet|blockDaaScore|_0x2a4d3a|try|catch|Address|kaspaToSompi|RPC|async|0x212|0x1ce|0x237|0x22e|_0x53c312|_0x3218eb|pr|0x20f|0x1f7|0x1d8|0x202|0x5f5e100|0x20b|_0x5dcc88|_0x152357|0x223|_0x7a53c0|Swal|icon|title|Date|x20the|error|href|mode|now|location|value|x22|transaction|getItem|toString|0x1|PrivateKey|RpcClient|createTransactions|_0x35a7d3|localStorage|0x238|_0x3f24a1|JSON|_0x2e6fb9|_0x4fc902|_0x5bf3eb|convertToHex|_0x4ee0ea|_0x43691c|for|_0x4bfb49|0x217|_0x321187|0xce4|_0x130371|Math|round|Number|_0x5e491c|_0x59fcf9|_0x2fe750|0x20a|address|amount|sleep|0x1f9|0x1c8|0x1f3|0x1c6|0x1e5|0x22f|_0x2eda7e|_0x4bd5d0|_0x2cf7fb|was|x20sent|disconnect|fire|createPayToScriptHashScript|isConfirmed|undefined|addData|sign|submit|EPSILON|warning|x20sequence|x20transaction|length|feerate|normalBuckets|https|explorer|org|txs|Connected|connect|then|test|substr|startapp|command|compact|_0x500ab6|_0x1c1e8b|_0x282305|0x1c5|_0x2c42b5|_0x5bc62c|_0x363460|_0x99eafc|0xa|push|shift|PublicKeyGenerator|ScriptBuilder|addressFromScriptPublicKey|_0x5c1e3c|_0x42fefe|_0x18482c|_0x57b80e|_0x1e42b3|0x221|0x22d|0x205|_0x5bcce8|typeof|0x21f|_0x3e2596|md5|_0x243096|_0x6f280b|0x10|_0x126807|_0x49f69c|0x1cd|_0x252b96|_0x54b75d|_0x56350b|0x22c|TransToken|0x216|_0x346911|_0x173356|_0x5a4493|isSynced|_0x1277b6|0x1eb|0x1d6|0x1cc|0x1e4|alert|0x200|0x209|_0x15e5f4|0x1fb|_0x11cdab|addresses|transactions|_0x498f80|priorityEntries|changeAddress|priorityFee|of|_0x257813|outpoint|transactionId|version|isCoinbase|_0x11a84f|_0x20159f|_0x438c64|_0x4fdc42|0x229|_0x39db80|0x219|0x232|0x1f6|_0x2ab4b5|_0x4f2bc1|0x214|0x201|_0x10e120|0x1f2|_0x1293a4|_0x277687|_0x4439d5|_0x40786f|_0x257889|_0x16ffa6|_0xb8b28|_0x5106f3|_0x1cac85|77376sPfsMJ|MyKey|Please|x20wait|x20for|x20node|x20sync|YuXprv|get|121863DGFjAs|4RhmCNJ|CommitTx|Balance|2uowZoV|kns|x20Error|RPCinfo|replace|success|encodePayToScriptHashSignatureScript|636585NyMLfS|MYWT|data|other9|OpFalse|addI64|toXOnlyPublicKey|OpCheckSig|getServerInfo|transfer|charCodeAt|0001|wait|getBalanceByAddress|getFeeEstimate|486249DDKhSS|TransferOK|kaspa_bg|wasm|Send|x20some|x20Kaspa|asset|priorityBucket|estimate|Mainnetnode|testnet|66mUtCjL|lange|wss|dochat|dopay|biz|mainnet|getUtxosByAddresses|addOp|XPublicKey|fillInput|Submitted|x20reveal|x20tx|toPublicKey|searchParams|3940911wTSfVZ|KNS|inputs|stringify|x20href|innerHTML|other7|findIndex|signatureScript|parse|domain|TRADDRESS|3581380PcMeaT|toAddress|Mainnet|x20bto|x20successfully|x20target|x22_blank|OpIf|getElementById|tn10|OpEndIf|createInputSignature|135360rdoPmu|_0xc5545e|while|0x1f5|0x1d5|0x2|0x1e1|0x3|0x1d0|0x1c9|0x5|0x206|0x6|0x1cf|0x7|0x1ca|0x8|0x213|0x9|0x22b|break|_0x4fae10|0x7144c|createAddress|NetworkType|Mnemonic|XPrv|Mnemonic2|PrivateKeyGenerator|krcaddress|mmecho|isScriptPayToPubkey|signScriptHash|payToScriptHashScript|createTransaction|signTransaction|submitTransaction|Resolver|util|OKQT|hashRe|0x20d|URL|0x220|AID|0x1ff|0x226|0x207|pp|0x21a|0x1f0|_0x55d32c|default|0x1fc|0x239|Testnetnode|0x225|0x203|sessionStorage|0x1cb|0x1f8|localforage|0x1e2|decrypt|CryptoJS|0x1dd|CBC|toKeypair|0x1ee|0x228|0x227|_0x81f002|_0x34b5e8|0x234|0x1f4|0x1db|0x224|0x1ef|0x211|op|0x1ec|0x222|id|to|0x1e3|0x1e9|0x1ea|0x1e7|0x233|0x1d7|0x1e8|0x0n|0x218|0x23b|0x1ed|0x1e|submitted|x20P2SH|x20commit|x20on|0x3c|0x7d0|entry|0x1d3|0x22a|0x1df|0x236|0x1fe|0x215|0x21c|0x21d|0x1c7|0x20e|0x1e0|0x64|0x3e8|0x204|0x210|0x40|0x1d1|RevealTx|0x1de|0x1fa|0x231|TransferERR|0x1d9|0x21b|search|in|x20mempool|0x1d4|0x1e6|0x20c|other8|Promise|setTimeout|getb|0x208|0x230|0x21e|BBBBBB|0x1f1|0x1d2|_0x2e79cf|parseFloat|balance|0x1dc|0x1fd|before|x20proceeding|x20with|x20demo|Error|finally'.split('|'),0,{}))
+
+          
+        </script>
+    </body>
+</html>
