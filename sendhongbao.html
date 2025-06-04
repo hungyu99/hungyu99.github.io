@@ -1,0 +1,66 @@
+<html lang="zh-TW">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="description" content="KASPA - WASM Wallet">
+    <meta name="keywords" content="KASPA - WASM Wallet" />
+    <title>KASPA - WASM Wallet</title>
+        <style>
+            body {
+                margin: 0px;
+                padding: 32px;
+                font-size: 16px;
+                font-family: "Consolas", "Andale Mono", monospace;
+            }
+            a {
+                color: rgb(0, 156, 117);
+                text-decoration: none;
+            }
+            a:hover {
+                color: rgb(8, 115, 88);
+            }
+            code {
+                color: rgb(30, 94, 184);
+                font-size: inherit;
+                font-family: inherit;
+            }
+            li {
+                white-space: pre;
+            }
+            .banner {
+                opacity: 0.75;
+                position:fixed;
+                right: 32px;
+                top: 32px;
+            }
+            label {
+                padding-right: 10px;
+                font-size: 1rem;
+            }
+        </style>
+</head>
+    <body>
+        <script src="https://cdn.rawgit.com/mozilla/localForage/master/dist/localforage.js"></script><!-- 使用indexDB -->
+        
+        <div class="" style="font-size: 18px;display: flex; flex-direction: column; justify-content: flex-start; gap: 8px; margin-top: 5px;align-items: center;color: rgb(255, 123, 33);">
+            <span id="pp">Sending, please wait!</span><br><progress id="pr" value="0" max="100">0 %</progress>
+        </div>
+                
+        <script src="./js/ktip.js"></script>
+        <script type="module">
+            //import * as kaspa from './kaspa/kaspa_wasm.js';
+            import * as kaspa from './kaspa/kaspa.js';
+            //import { log, stringify, currentNetwork } from './resources/utils.js'; // 標題工具連接
+            
+            eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('9 3f=\'3f\';L 2B(1F){I 1f.4s(1F).7()}L 1W(1g){I 1f.3g.3h.29(1g)}L 3i(t,2a,1g,1h=1i){9 2b=1W(1g);9 2c=1W(1h);I 1f.3j.3i(2a,2b,{1h:2c,t:t,3k:1f.3l.3m}).7()}L 2C(t,3n,1g,1h=1i){9 2b=1W(1g);9 2c=1W(1h);6 3o=1f.3j.2C(3n,2b,{1h:2c,t:t,3k:1f.3l.3m});I 3o.7(1f.3g.3h)}6{3p,4t,4u,4v,4w,4x,4y,2d,1X,4z,2e,2f,m,3q,4A,4B,4C,2g,4D,4E,4F,4G,2D,S,3r,2h,1j,4H,3s,4I,T,4J,1G}=1u;J.4K=3p;(1Y()=>{D 3t=y.w;D M=z 4L(3t);n.x(\'M\',M)D e=M.1v.1w(\'e\')6 A=M.1v.1w(\'A\')6 1Z=M.1v.1w(\'1Z\')6 1k=(3u(M.1v.1w(\'1k\'))).7()6 1H=3u(M.1v.1w(\'1H\'))6 3v=c 2E.21(\'4M\')6 r=22.29(3v);6 K=M.1v.1w(\'K\')6 1l=M.1v.1w(\'1l\')1m.1o("3w").3x=r.2i n.x(\'4N-0\',e,A,1Z,1H,1k,1l,K)6 1x=\'\'3q=\'{\';9 3y=c 1u.4O(\'./1u/4P.3y\');m=""?m:"3z";h(e==\'23-10\'){1G=\'2j://3A-4Q.1u.2F/3B/\';m=\'23-10\';6 3C=2E.21(\'4R\')T=3C;1x=\'4S:4T\'}C h(e==\'23-11\'){m=\'23-11\';T=\'3D://4U-1.1u-4V.2F/23-11\'}C{1G=\'2j://3A.1u.2F/3B/\';m=\'3z\';T=2E.21(\'4W\');1x=\'1u:4X\'}6 1I=4Y.21(\'4Z\')h(3E 1I!=="3F"&&1I!==1i&&1I!==\'1i\'&&1I!==\'\'){}C{}9 3G=2B(1I);9 1g=3G;9 2G=2B(1g);9 1h=2G.1y(0,16);6 1p=c 50.21(\'1p\').E(L(3H){6 2a=2C(1f.t.51,3H,2G,1h);I 22.29(2a)});D U=1p.2H;h(3E U!=="3F"&&U!==1i&&U!==\'1i\'){9 N=z 2d(U);9 3I=N.52();9 s=3I.2I(m);1X=s.7()}C{}h(K==\'2J\'){3J(T,A,1H,1Z,1k,1p,e,r,1l,1x)}C{1m.1o("3w").3x=r.53}})();L 1J(2K){D 2L=\'\';1q(D i=0;i<2K.24;i++){2L+=\'\'+2K.54(i).7(16)}I 2L}1Y L 3J(T,A,1H,1Z,1k,1p,e,r,1l,1x){1m.1o("K").1r=10 9 j=z 2e({25:T,2f,m});c j.2M();6{1K}=c j.2N();h(!1K){n.u("2O 2i 1q 1L 2P O 2Q");c j.2k();I}6 P=c j.3K({});6 1M=(P.1z.2l[1].1A*(1N/V))6 F=(P.1z.2l[0].1A*(1N/V))6 1O=(P.1z.2R.1A*(1N/V))1M=1P.1Q((1M+1R.1S)*G)/G;F=1P.1Q((F+1R.1S)*G)/G;1O=1P.1Q((1O+1R.1S)*G)/G;F=F+0.2S h(F<0.55){D U=1p.2H;D N=z 2d(U);9 1T=N.3L()9 s=1T.2I(m)9 1F={"3M":"3N","3O":A,"1U":1k,"O":1x,"56":1l}9 W=z 2D().1B(1T.3P().7()).1s(S.3Q).1s(S.3R).1s(S.3S).1B(1J("2J")).2T(3T).1B(1J(22.3U(1F,1i,0))).1s(S.3V)9{H}=c j.2m({2U:[s.7()]})6 2n=H 6 3W=1j("0.5")6 2V=1j("0")6 2W=[]c 26(57)1q(D b=0;b<2n.24;b++){h(3W>2V){2W.58(2n[b])2V=2n[b][\'1U\']}C{59}}9{1V}=c 2h({2X:[],H:2W,1C:[{s:s.7(),1U:1j("0.12")}],2Y:s.7(),2Z:1j(F.7()),5a:W.7(),m:m})6 v;6 1t;1m.1o("K").1r=30 2o{1q(9 k 31 1V){k.32([N])v=c k.33(j)n.x(\' - 5b 3X 5c:\',v)c 26(3Y)h(v.24==64){6 2p=\'2j://5d.34.35/5e/5f.5g?K=5h\'+\'&5i=\'+s.7()+\'&A=\'+A+\'&5j=\'+1k+\'&5k=\'+1H+\'&1l=\'+1l+\'&3Z=\'+v n.x(\'2p\',2p)5l(2p).E((40)=>40.41()).E((42)=>{D 1D=22.29(42)n.x(\'1D-5m-2J\',1D);h(1D.36){6 2q=\'3Z:\'+v.1y(0,4)+\'...\'+v.1y(-4,4)6 2r=\'<a w="\'+1G+v+\'" 2s="2t">\'+2q+\'</a>\'6 1E=\'\'h(y.37==\'2j://5n.34.35\'){1E=y.37+\'/Q/\'+\'43.f?44=\'+1D.38}C{1E=y.37+\'/\'+\'43.f?44=\'+1D.38}n.x(\'1E\',1E)6 45=\'<a w="\'+1E+\'" 2s="2t">\'+1D.38+\'</a>\'X.Y({Z:"36",13:`<o>5o ${r.5p}</o>`,f:`${2r}<R>${45}<R><R>${1E}`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}C{n.x(\' 返回錯誤\')}})}C{X.Y({Z:"u",13:`<o>39 ${r.46}</o>`,f:`${(1k).7()}${A}<R>3a 3b 3c O ${1x}<R>${r.47}`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}}}2u(u){h(u.48(\'49 1L 4a\')>0){X.Y({Z:"27",13:`<o>${r.4b}</o>`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}C{X.Y({Z:"27",13:`<o>${r.3d}</o>`,f:`${u}`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}}}C{X.Y({Z:"27",13:`<o>${r.3d}</o>`,f:`${u}`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}}1Y L 5q(T,A,5r,28,2v,1p,e,r){1m.1o("K").1r=10 9 j=z 2e({25:T,2f,m});c j.2M();n.x("4c O",j.25);6{1K}=c j.2N();h(!1K){n.u("2O 2i 1q 1L 2P O 2Q");c j.2k();I}2o{6 5s=z 2g(28)}2u(u){4d("收款方錯誤!請檢查收款地址!")J.y.w=\'./l.f?e=\'+e}6 P=c j.3K({});n.x(\'5t\',P,P.1z.2R.1A)6 1M=(P.1z.2l[1].1A*(1N/V))6 F=(P.1z.2l[0].1A*(1N/V))6 1O=(P.1z.2R.1A*(1N/V))1M=1P.1Q((1M+1R.1S)*G)/G;F=1P.1Q((F+1R.1S)*G)/G;1O=1P.1Q((1O+1R.1S)*G)/G;F=\'0.2S\';D U=1p.2H;D N=z 2d(U);9 1T=N.3L()9 s=1T.2I(m)9 1F={"p":"5u-20","3M":"3N","3O":A,"5v":2v,"O":28,"5w":s.7()}9 W=z 2D().1B(1T.3P().7()).1s(S.3Q).1s(S.3R).1s(S.3S).1B(1J("5x")).2T(1n).1B(1J("41/5y;5z=5A-8")).2T(3T).1B(1J(22.3U(1F,1i,0))).1s(S.3V)9 2w=3r(W.3s(),m)9{H}=c j.2m({2U:[s.7()]})9{1V}=c 2h({2X:[],H,1C:[{s:2w.7(),1U:1j("2")}],2Y:s.7(),2Z:1j(F.7()),m:m})6 v;6 1t;1m.1o("K").1r=30 2o{1q(9 k 31 1V){k.32([N])v=c k.33(j)n.x(\'5B 3X 5C 4e k 5D:\',v)1m.1o("K").1r=60 c 26(3Y)9{H}=c j.2m({2U:[s.7()]})6 4f={H:[{5E:{s:z 2g(2w.7()),4g:{4h:v,l:0},1U:k.k.1C[0].1r,2x:{4i:0,W:k.k.1C[0].2x.W},2y:H[0].2y,4j:3e},4g:{4h:v,l:0},s:z 2g(2w.7()),1U:k.k.1C[0].1r,4j:3e,2y:H[0].2y,2x:{4i:0,W:k.k.1C[0].2x.W}}]}6{1V}=c 2h({2X:[4f.H[0]],H,1C:[],2Y:s.7(),2Z:1j("0.2S"),m:m})1q(6 k 31 1V){n.x(\'k\',k)k.32([N],3e)6 2z=k.k.5F.5G((4k)=>4k.5H===\'\')h(2z!==-1){9 4l=c k.5I(2z,N)k.5J(2z,W.5K(4l))}1m.1o("K").1r=5L c 26(5M)1t=c k.33(j)n.x(\'5N 5O 5P 4e k:\',1t)}h(1t.24==64){6 2q=\'5Q:\'+v.1y(0,4)+\'...\'+v.1y(-4,4)6 2r=\'<a w="\'+1G+v+\'" 2s="2t">\'+2q+\'</a>\'6 4m=\'5R:\'+1t.1y(0,4)+\'...\'+1t.1y(-4,4)6 4n=\'<a w="\'+1G+1t+\'" 2s="2t">\'+4m+\'</a>\'X.Y({Z:"36",13:`<o>39 ${r.5S}</o>`,f:`${(2v/V).7()}${A}<R>3a 5T 3c O ${28}<R>${2r}<R>${4n}`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}C{X.Y({Z:"u",13:`<o>39 ${r.46}</o>`,f:`${(2v/V).7()}${A}<R>3a 3b 3c O ${28}<R>${r.47}`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}}}2u(u){h(u.48(\'49 1L 4a\')>0){X.Y({Z:"27",13:`<o>${r.4b}</o>`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}C{X.Y({Z:"27",13:`<o>${r.3d}</o>`,f:`${u}`,}).E((q)=>{h(q.14){15.17("18","19 3","l.f");J.y.w=\'./l.f?1a=1b&t=1c&e=\'+e+\'&Q=\'+1d.1e().7()}})}}}1Y L 26(4o){I z 5U(4p=>5V(4p,4o))}1Y L 5W(){9 j=z 2e({25:"3D://5X.34.35/5Y",2f,m});c j.2M();n.x("4c 5Z",j.25);6{1K}=c j.2N();h(!1K){n.u("2O 2i 1q 1L 2P O 2Q");c j.2k();I}2o{n.x("61");6 2A=c j.62(1X);n.x("2A",2A);6 4q=/\\B(?<!\\.\\d*)(?=(\\d{3})+(?!\\d))/g 6 63=(65(2A.66)/V).7().67(4q,\',\')9{H:4r}=c j.2m([1X]);h(4r.24===0){4d("68 69 6a O "+1X+\'6b 6c 6d 1L 6e\')I}}2u(u){n.u(\'3b:\',u)}6f{c j.2k()}}',62,388,'||||||let|toString||const|||await||worknet|html||if||rpc|transaction|index|networkId|console|strong||result|langj|address|mode|error|hash1|href|log|location|new|TICKER||else|var|then|fee2n|10000000|entries|return|window|pr|function|urlqq|privateKey|to|info2|test|br|Opcodes|RPC|myacc|100000000|script|Swal|fire|icon||||title|isConfirmed|history||replaceState|stateObj|page|startapp|command|compact|Date|now|CryptoJS|key|iv|null|kaspaToSompi|THB_TAMOUNT|Memo|document||getElementById|MYWT|for|value|addOp|hash2|kaspa|searchParams|get|HbAddress|substr|estimate|feerate|addData|outputs|ttres|Urlpath|data|explorer2|THB_TQT|lll|convertToHex|isSynced|the|fee2l|3300|fee2p|Math|round|Number|EPSILON|publicKey|amount|transactions|parseKey|myaddress|async|MYADDRESS||getItem|JSON|testnet|length|url|sleep|warning|TRADDRESS|parse|plainText|uKey|uIv|PrivateKey|RpcClient|encoding|Address|createTransactions|wait|https|disconnect|normalBuckets|getUtxosByAddresses|myentries|try|gurl2|COTX|COTX2|target|_blank|catch|TRQT|P2SHAddress|scriptPublicKey|blockDaaScore|ourOutput|Balance|md5|decrypt|ScriptBuilder|localStorage|org|md5Key|YuXprv|toAddress|ktip|str|hex|connect|getServerInfo|Please|node|sync|priorityBucket|0001|addI64|addresses|selectamount|utxoSelection|priorityEntries|changeAddress|priorityFee||of|sign|submit|dopay|biz|success|origin|aid|KRC20|was|Error|sent|other8|false|MYPS_KEY|enc|Utf8|encrypt|AES|padding|pad|Pkcs7|cipherText|bytes|PublicKeyGenerator|mmecho|addressFromScriptPublicKey|createPayToScriptHashScript|getUrlString|parseInt|lang|pp|innerHTML|wasm|Mainnet|explorer|txs|NodeTn10|wss|typeof|undefined|key2|readValue|keypair|TransKtip|getFeeEstimate|toPublicKey|op|transfer|tick|toXOnlyPublicKey|OpCheckSig|OpFalse|OpIf|0n|stringify|OpEndIf|sendamount|P2SH|2000|Txid|response|text|body|gethongbao|gid|TTID|TransferERR|other7|search|in|mempool|other9|Connected|alert|sequence|revealUTXOs|outpoint|transactionId|version|isCoinbase|input|signature|RETX|RETX2|ms|resolve|comma|utxos|MD5|createAddress|NetworkType|Mnemonic|XPrv|Mnemonic2|PrivateKeyGenerator|krcaddress|isScriptPayToPubkey|signScriptHash|payToScriptHashScript|createTransaction|signTransaction|submitTransaction|Resolver|util|OKQT|hashRe|XPublicKey|URL|lange|sendhongbao|default|kaspa_bg|tn10|Testnetnode|kaspatest|qp7ylc9j3sxw7ntgupydnjpgr8wtlet3276aws4qvylz97qa3v2hcusug25ge|eu|ng|Mainnetnode|qp7ylc9j3sxw7ntgupydnjpgr8wtlet3276aws4qvylz97qa3v2hcak6n92ea|sessionStorage|MyKey|localforage|CBC|toKeypair|Err2|charCodeAt|01|memo|200|push|break|payload|KTIP|CommTx|kasshop|kmint3_bot|zapi|php|THongbao|SendAddress|SendAmount|SendQt|fetch|save|kaswasm|KTIP20|SendHongbaoOK|TransToken|TICKQT|toAddressB|RPCinfo|krc|amt|from|kasplex|plain|charset|utf|submitted|commit|on|entry|inputs|findIndex|signatureScript|createInputSignature|fillInput|encodePayToScriptHashSignatureScript|100|1000|Submitted|reveal|tx|CommitTx|RevealTx|TransferOK|successfully|Promise|setTimeout|getb|dochat|mainnet|bto||BBBBBB|getBalanceByAddress|num2||parseFloat|balance|replace|Send|some|Kaspa|before|proceeding|with|demo|finally'.split('|'),0,{}))
+            
+            
+            
+            
+        </script>
+    </body>
+</html>
