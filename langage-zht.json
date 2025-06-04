@@ -12,6 +12,7 @@
     "Tn10Node": "Tn10 節點",
     "SwitchMainnet": "切換主網",
     "Tesenet10": "Tesenet10",
+    "Langage": "語言",
     
     "PasswordErr": "密碼錯誤",
     "MnemonicPhrase": "助記詞",
@@ -19,6 +20,7 @@
     "TransferOK": "傳送完成!",
     "TransferERR": "傳送失敗!",
     "wait": "傳送中, 請稍後!",
+    "SendHongbaoOK": "紅包建立完成!",
     
     "REVEACC2_add": "新增錢包",
     "REVEACC2_2": "助記詞-空白表示自動產生",
@@ -55,11 +57,31 @@
     "other8": "節點繁忙, 請稍後試試!",
     "other9": "您還有一筆交易在 mempool 等待完成, 請稍後再試試!",
     "other10": "餘額需大於2, 才能執行傳送TOKEN!",
+    "other11": "kas 餘額需大於 0.1, 才能執行傳送 KTIP Token!",
+    "other12": "紅包金額需大於 1, 小於 1000, 請查看!",
+    "other13": "紅包數量需大於 1, 小於 100, 請查看!",
+    "other14": "(紅包金額/紅包數), 需大於 1, 請查看!",
+    "other15": "GasFee 超過0.01,暫停功能, 請稍後試試!",
+    "other16": "您還沒有錢包,請先申請一個非託管錢包!",
     
     "wallet": "錢包",
     "name": "名稱",
     "info": "資訊",
     "delete": "刪除",
     "Modifywalletname": "修改錢包名稱",
-    "address": "地址"
+    "address": "地址",
+    
+    "GetHONGBAO": "領取紅包",
+    "THONGBAO": "發送紅包",
+    "THB_TQT": "總包數",
+    "THB_TAMOUNT": "總金額",
+    "THB_MEMO": "MEMO",
+    
+    "ErrAA": "抱歉, 這紅包已經被領完了!!",
+    "ErrBB": "這個紅包您已經領過了!!",
+    "ErrCC": "傳送失敗,請稍後試試!",
+    "ErrOK": "已經領到紅包",
+    "Err1": "api節點有誤,請稍後試試!",
+    "Err2": "執行錯誤,請稍後試試!"
+    
 }
