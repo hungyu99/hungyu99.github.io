@@ -12,6 +12,7 @@
     "Tn10Node": "Tn10 Node",
     "SwitchMainnet": "Switch Mainnet",
     "Tesenet10": "Tesenet10",
+    "Langage": "Language",
     
     "PasswordErr": "Wrong password",
     "MnemonicPhrase": "Mnemonic phrase",
@@ -19,6 +20,7 @@
     "TransferOK": "Transfer completed!",
     "TransferERR": "Transfer failed!",
     "wait": "Sending, please wait!",
+    "SendHongbaoOK": "Red envelope created!",
     
     "REVEACC2_add": "Add wallet",
     "REVEACC2_2": "Mnemonic phrase - blank means automatically generated",
@@ -55,11 +57,30 @@
     "other8": "The node is busy, please try again later!",
     "other9": "You still have a transaction waiting to be completed in mempool, please try again later!",
     "other10": "The balance must be greater than 2 before the TOKEN can be transferred!",
+    "other11": "The kas balance must be greater than 0.1 to transfer KTIP Token!",
+    "other12": "The red envelope amount must be greater than 1 and less than 1000, please check!",
+    "other13": "The number of red envelopes must be greater than 1 and less than 100, please check!",
+    "other14": "(Red envelope amount/red envelope number), must be greater than 1, please check!",
+    "other15": "GasFee exceeds 0.01, suspend function, please try again later!",
+    "other16": "You don't have a wallet yet, please apply for a non-custodial wallet first!",
     
     "wallet": "wallet",
     "name": "name",
     "info": "information",
     "delete": "Delete",
     "Modifywalletname": "Modify wallet name",
-    "address": "address"
+    "address": "address",
+    
+    "GetHONGBAO": "Get red envelope",
+    "THONGBAO": "Send red envelopes",
+    "THB_TQT": "Total number of packages",
+    "THB_TAMOUNT": "Total amount",
+    "THB_MEMO": "MEMO",
+    
+    "ErrAA": "Sorry, this red envelope has been claimed!!",
+    "ErrBB": "You have already claimed this red envelope!!",
+    "ErrCC": "Transmission failed, please try again later!",
+    "ErrOK": "The red envelope has been claimed",
+    "Err1": "The api node is incorrect, please try again later!",
+    "Err2": "Execution error, please try again later!"
 }
