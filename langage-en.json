@@ -57,7 +57,7 @@
     "other8": "The node is busy, please try again later!",
     "other9": "You still have a transaction waiting to be completed in mempool, please try again later!",
     "other10": "The balance must be greater than 2 before the TOKEN can be transferred!",
-    "other11": "The kas balance must be greater than 0.1 to transfer KTIP Token!",
+    "other11": "The kas balance must be greater than 0.2 to transfer KTIP Token!",
     "other12": "The red envelope amount must be greater than 1 and less than 1000, please check!",
     "other13": "The number of red envelopes must be greater than 1 and less than 100, please check!",
     "other14": "(Red envelope amount/red envelope number), must be greater than 1, please check!",
