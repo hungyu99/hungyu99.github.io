@@ -63,6 +63,8 @@
     "other14": "(Red envelope amount/red envelope number), must be greater than 1, please check!",
     "other15": "GasFee exceeds 0.01, suspend function, please try again later!",
     "other16": "You don't have a wallet yet, please apply for a non-custodial wallet first!",
+    "other17": "HB Log",
+    "other18": "HB Rankings",
     
     "wallet": "wallet",
     "name": "name",
